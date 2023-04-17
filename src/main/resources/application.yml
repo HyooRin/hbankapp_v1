@@ -27,4 +27,11 @@ spring:
       enabled: true
   output:
     ansi:
-      enabled: always              
+      enabled: always    
+
+mybatis:
+  mapper-locations:
+  - classpath:mapper/**.xml
+  configuration:
+    map-underscore-to-camel-case: true
+                 
