@@ -1,5 +1,6 @@
 package com.hr.bankapp.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hr.bankapp.dto.SignInFormDto;
 import com.hr.bankapp.dto.SignUpFormDto;
+import com.hr.bankapp.handler.exception.CustomRestfulException;
 
 @Controller
 @RequestMapping("/user")
@@ -18,13 +20,29 @@ public class UserController {
 		return "/user/signUp";
 	}
 	
+	// MIME TYPE : x-www-form-urlencoded
+	// form : Query String 방식으로 들어온다
+	// dto : object mapper 처리	
 	/**
 	 * 회원가입처리 
 	 * @param signUpFormDto
 	 * @return 리다이렉트 로그인페이지 
 	 */
+	
 	@PostMapping("sign-up")
 	public String signUpProc(SignUpFormDto signUpFormDto) {
+		
+		// 1. 유효성 검사
+		if(signUpFormDto.getUsername() == null || signUpFormDto.getUsername().isEmpty()) {
+			throw new CustomRestfulException("username을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
+		if (signUpFormDto.getPassword() == null || signUpFormDto.getPassword().isEmpty()) {
+			throw new CustomRestfulException("password을 입력하세요", HttpStatus.BAD_REQUEST);
+
+		}
+		if (signUpFormDto.getFullname() == null || signUpFormDto.getFullname().isEmpty()) {
+			throw new CustomRestfulException("fullname을 입력하세요", HttpStatus.BAD_REQUEST);
+		}
 		
 		return "redirect:user/sign-in";
 	}

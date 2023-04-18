@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
-	namespace="com.tenco.bank.repository.interfaces.HistoryRepository">
+	namespace="com.hr.bankapp.repository.interfaces.HistoryRepository">
 
 	<insert id="insert"
-		parameterType="com.tenco.bank.repository.model.History">
+		parameterType="com.hr.bankapp.repository.model.History">
 		insert into
 		history_tb(
 		amount, w_balance, d_balance,
@@ -17,7 +17,7 @@
 	</insert>
 
 	<update id="updateById"
-		parameterType="com.tenco.bank.repository.model.History">
+		parameterType="com.hr.bankapp.repository.model.History">
 		update history_tb
 		set amount = #{amount},
 		w_balance =
@@ -30,11 +30,11 @@
 		where id = #{id}
 	</delete>
 	
-	<select id="findById" resultType="com.tenco.bank.repository.model.History">
+	<select id="findById" resultType="com.hr.bankapp.repository.model.History">
 		select * from history_tb where id = #{id}
 	</select>
 
-	<select id="findAll" resultType="com.tenco.bank.repository.model.History">
+	<select id="findAll" resultType="com.hr.bankapp.repository.model.History">
 		select * from history_tb
 	</select>
 
