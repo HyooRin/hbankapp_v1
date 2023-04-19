@@ -1,7 +1,6 @@
 package com.hr.bankapp.handler;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.hr.bankapp.handler.exception.CustomRestfulException;
@@ -30,6 +29,17 @@ public class MyRestfulExceptionHandler {
 		sb.append("</script>");		
 		
 		return sb.toString();
+	}
+	@ExceptionHandler(com.hr.bankapp.handler.exception.unAuthorizedException.class)
+	public String unAuthorizedException(com.hr.bankapp.handler.exception.unAuthorizedException e) {
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<script>");
+		sb.append("alert( '" + e.getMessage() + "' );");
+		sb.append("location.href='/user/sign-in';");
+		sb.append("</script>");	
+		
+		return sb.toString();		
 	}
 	
 	
